@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <section class='category-list'>
+        <h1 class='category-title'>My Lists</h1>
+        <div class='filter'>
+            <i class="fa-solid fa-sort"></i>
+            <i class="fa-solid fa-bars"></i>
+        </div>
+    </section>
+    
+    <section class="cat-cards">
+        {% for category in categories %}
+        <div class="cat-card">
+            <a href={{ category.get_absolute_url }}>
+                <div class='cat-icon'>
+                    <i class="fa-solid fa-list-check"></i>
+                </div>
+                <h4 class='cat-title'>{{ category.title|title }}</h4>
+                <p class='cat-items'>{{ category.tasks.count }} item{{ category.tasks.count|pluralize }}</p
+            </a>
+        </div>
+        {% endfor %}
+    </section>
+{% endblock content %}

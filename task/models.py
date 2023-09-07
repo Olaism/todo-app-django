@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 
 def default_to_one_week():
@@ -11,15 +12,19 @@ class Category(models.Model):
     def __str__(self):
         return self.title
         
+    def get_absolute_url(self):
+        return reverse('category_detail', args=(self.pk,))
+        
     class Meta:
         indexes = [models.Index(fields=['title'])]
         ordering = ('-created',)
+        verbose_name_plural = 'categories'
 
 
 class Task(models.Model):
     title = models.CharField(max_length=100)
     completed = models.BooleanField(default=False)
-    rating = models.PositiveIntegerField(default=0)
+    important = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     due_date = models.DateTimeField(default=default_to_one_week)
