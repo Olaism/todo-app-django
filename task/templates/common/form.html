@@ -11,10 +11,10 @@
     {% if form.non_field_errors %}
         <ul class="alert alert-danger" role="alert">
             {% for error in form.non_field_errors %}
-                <li {% if forloop.last %}class="mb-0"{% endfor %}>{{ error }}</li>
+                <li {% if forloop.last %}class="mb-0"{% endif %}>{{ error }}</li>
             {% endfor %}
         </ul>
-    {% endfor %}
+    {% endif %}
         
     {% for field in form %}
     <div class="form-group">

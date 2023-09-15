@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import reverse, resolve
 
 from .models import Category
-from .views import category_list, category_detail
+from .views import category_list, category_detail, category_new
 
 class CategoryListTests(TestCase):
     def setUp(self):
@@ -32,4 +32,17 @@ class CategoryDetailTests(TestCase):
 
 
 class CategoryCreateTests(TestCase):
-    pass
+    def setUp(self):
+        self.url = reverse('category_new')
+        self.response = self.client.get(self.url)
+    def test_new_category_view_success_code(self):
+        self.assertEqual(self.response.status_code, 200)
+    
+    def test_new_category_url_resolves_new_category_view(self):
+        view = resolve("/category/new/")
+        self.assertEquals(view.func, category_new)
+    
+    
+    
+    
+    
